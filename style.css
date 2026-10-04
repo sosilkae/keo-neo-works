@@ -1,51 +1,61 @@
 @font-face {
   font-family: 'PP Neue Montreal';
-  src: url('fonts/PPNeueMontreal-Book.otf') format('opentype');
+  src: url('fonts/PP Neue Montreal/PPNeueMontreal-Book.otf') format('opentype');
   font-weight: 400;
-  font-style: normal;
+  font-display: swap;
 }
-
 @font-face {
   font-family: 'PP Neue Montreal';
-  src: url('fonts/PPNeueMontreal-Medium.otf') format('opentype');
+  src: url('fonts/PP Neue Montreal/PPNeueMontreal-Medium.otf') format('opentype');
   font-weight: 500;
-  font-style: normal;
+  font-display: swap;
 }
-
-@font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('fonts/PPNeueMontreal-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
+* { box-sizing: border-box; }
+html { scroll-padding-top: 100px; }
+body { margin: 0; background: #fff; color: #000; font-family: 'PP Neue Montreal', Arial, sans-serif; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 24px 20px;
+  font-size: 32px;
+  line-height: 38px;
+  letter-spacing: .02em;
+  background: #fff;
 }
-
-@font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('fonts/PPNeueMontreal-Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
+.wordmark { font-weight: 500; }
+.menu-toggle { border: 0; border-radius: 0; padding: 0; background: transparent; color: inherit; cursor: pointer; font-weight: 400; }
+.intro { margin: 0; padding: 100px 20px 21px; font-size: 16px; line-height: 19px; letter-spacing: .02em; font-weight: 500; }
+.photo { margin: 0; min-width: 0; overflow: hidden; }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero { aspect-ratio: 393 / 489; }
+.cups { width: 76.335878%; aspect-ratio: 300 / 178; margin: 20.356234% auto; }
+.landscape { aspect-ratio: 393 / 262; }
+.interior { aspect-ratio: 393 / 261; }
+.persimmon { width: 44.274809%; aspect-ratio: 174 / 217; margin: 25.445293% auto 29.770992%; }
+.still-life { aspect-ratio: 393 / 490; }
+.site-menu { position: fixed; inset: 86px 0 auto; z-index: 15; padding: 32px 20px 40px; background: white; font-size: 26px; }
+.site-menu:not([hidden]) { display: grid; gap: 24px; }
+.skip-link { position: fixed; top: -100px; left: 20px; z-index: 30; padding: 12px; background: #fff; color: #000; }
+.skip-link:focus { top: 10px; }
+@media (min-width: 768px) {
+  /* White lettering subtracts from imagery beneath the transparent header. */
+  .site-header { background: transparent; color: white; mix-blend-mode: difference; padding: 24px 32px; }
+  .intro { padding: 112px 32px 28px; }
+  .hero { height: min(1000px, 110vh); aspect-ratio: auto; }
+  .hero img { object-position: center 48%; }
+  .cups { width: 54%; max-width: 900px; margin: 120px auto; }
+  .photo-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .persimmon { width: 28%; max-width: 440px; margin: 140px auto; }
+  .still-life { height: min(1100px, 110vh); aspect-ratio: auto; }
+  .site-menu { padding: 40px 32px; }
 }
-
-
-body {
-  font-family: 'PP Neue Montreal', Arial, sans-serif;
-  margin: 40px;
-  background: white;
-  color: black;
-  font-weight: 400;
-}
-
-
-main {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-h1 {
-  font-size: 96px;
-  letter-spacing: -0.04em;
-}
-
-p {
-  font-size: 24px;
+@media (max-width: 359px) {
+  .intro { font-size: 14px; }
 }
