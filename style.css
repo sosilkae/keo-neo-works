@@ -59,3 +59,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
 @media (max-width: 359px) {
   .intro { font-size: 14px; }
 }
+
+.scroll-logo { display: none; }
+@media (max-width: 767px) {
+  body { --nav-text: 1; --nav-inset: 0px; --nav-background: 1; --logo-opacity: 0; --logo-scale: .5; --logo-rotation: 0deg; }
+  .site-header { background: rgb(255 255 255 / var(--nav-background)); }
+  .site-header .wordmark { opacity: var(--nav-text); transform: translateX(var(--nav-inset)); }
+  .site-header .menu-toggle { opacity: var(--nav-text); transform: translateX(calc(-1 * var(--nav-inset))); }
+  .scroll-logo {
+    display: grid; place-items: center; position: fixed; z-index: 21;
+    top: 9px; left: calc(50% + .61px); width: 44px; height: 44px;
+    transform: translateX(-50%); opacity: var(--logo-opacity);
+    pointer-events: none; mix-blend-mode: difference;
+  }
+  .scroll-logo img { width: 24.682px; height: 24.682px; filter: invert(1); transform: scale(var(--logo-scale)) rotate(var(--logo-rotation)); }
+  .scroll-logo.is-active { pointer-events: auto; }
+  body.nav-returning .site-header { animation: nav-return 280ms cubic-bezier(.22, 1, .36, 1) both; }
+  @keyframes nav-return { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.nav-returning .site-header { animation: none; }
+  .site-header .wordmark, .site-header .menu-toggle, .scroll-logo img { transform: none; }
+}
