@@ -1,22 +1,50 @@
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#site-menu');
+let menuScrollY = 0;
+const pageBehindMenu = [...document.querySelectorAll('main, footer, .skip-link')];
 function setMenu(open) {
+  if (open === !menu.hidden) return;
+  if (open) {
+    menuScrollY = scrollY;
+    document.body.style.setProperty('--menu-scroll-offset', `${-menuScrollY}px`);
+    renderNavigation(0);
+  }
   toggle.setAttribute('aria-expanded', String(open));
   toggle.textContent = open ? 'Close' : 'Menu';
   menu.hidden = !open;
+  document.body.classList.toggle('menu-open', open);
+  pageBehindMenu.forEach(element => { element.inert = open; });
+  if (!open) {
+    window.scrollTo(0, menuScrollY);
+    lastY = menuScrollY;
+    toggle.focus({ preventScroll: true });
+    requestNavigationUpdate();
+  }
 }
 toggle.addEventListener('click', () => setMenu(menu.hidden));
 menu.addEventListener('click', (event) => {
   if (event.target.closest('a')) setMenu(false);
 });
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !menu.hidden) {
-    setMenu(false);
-    toggle.focus();
-  }
+document.querySelector('.wordmark').addEventListener('click', () => {
+  if (!menu.hidden) setMenu(false);
 });
-document.addEventListener('click', (event) => {
-  if (!menu.hidden && !menu.contains(event.target) && !toggle.contains(event.target)) setMenu(false);
+document.addEventListener('keydown', (event) => {
+  if (menu.hidden) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    setMenu(false);
+  }
+  if (event.key === 'Tab') {
+    const controls = [document.querySelector('.wordmark'), toggle, ...menu.querySelectorAll('a[href]')];
+    const index = controls.indexOf(document.activeElement);
+    if (event.shiftKey && index <= 0) {
+      event.preventDefault();
+      controls.at(-1).focus();
+    } else if (!event.shiftKey && (index === controls.length - 1 || index < 0)) {
+      event.preventDefault();
+      controls[0].focus();
+    }
+  }
 });
 
 // Initial morph follows scroll distance; subsequent upward intent restores navigation.

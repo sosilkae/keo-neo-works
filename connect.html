@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Keo Neo creates objects and moments for a space, and invites you into them. Get in touch.">
+  <title>Connect — Keo Neo</title>
+  <link rel="stylesheet" href="style.css?v=takeover1">
+  <link rel="stylesheet" href="connect.css?v=spotify-live1">
+  <script src="script.js?v=takeover1" defer></script>
+  <script src="connect.js?v=spotify-live1" defer></script>
+</head>
+<body id="top" class="connect-page">
+  <a class="skip-link" href="#connect">Skip to contact information</a>
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="Keo Neo home">Keo Neo</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
+  </header>
+  <a class="scroll-logo" href="/" aria-label="Keo Neo home" aria-hidden="true" tabindex="-1"><img src="images/nav-logo.png" alt="" width="25" height="25"></a>
+  <nav id="site-menu" class="site-menu" aria-label="Main navigation" hidden>
+    <span role="link" aria-disabled="true">Repository</span>
+    <span role="link" aria-disabled="true">Projects</span>
+    <a href="connect.html" aria-current="page">Connect</a>
+  </nav>
+  <main class="connect-main" id="connect">
+    <h1 class="visually-hidden">Connect with Keo Neo</h1>
+    <div class="connect-film" data-node-id="72:281">
+      <video id="about-film" muted loop playsinline preload="metadata" poster="images/connect-poster.png" aria-label="A moment in the Keo Neo studio">
+        <source src="videos/about-me-web.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+      <button class="film-toggle" type="button" aria-label="Play studio video">Play</button>
+    </div>
+    <div class="connect-content">
+      <div class="connect-copy" data-node-id="74:296">
+        <p>Every object has a part to play in the room it was made for.</p>
+        <p><strong>Keo Neo</strong> creates objects and moments for a space, and invites you into them. But the thing itself matters less than what happens around it. Feel free to come and go. Stay to think. Linger. Meet something. Leave early. However long it is that you decide to stay, you were part of it.</p>
+      </div>
+      <address class="connect-links">
+        <a class="email-link" href="mailto:keoneo.works@gmail.com"><img src="images/connect-arrow.svg" alt="">keoneo.works@gmail.com</a>
+        <a href="https://www.instagram.com/keoneo.works/" target="_blank" rel="noopener noreferrer">@keoneo.works<span class="visually-hidden"> on Instagram (opens in a new tab)</span></a>
+      </address>
+    </div>
+  </main>
+  <footer class="studio-player">
+    <div class="studio-bar">
+      <button class="studio-play" type="button" aria-label="Play Spotify music" disabled><img src="images/studio-play.svg" alt=""><span class="pause-symbol" hidden>Ⅱ</span></button>
+      <img class="studio-status" src="images/studio-status.svg" alt="">
+      <button class="studio-expand" type="button" aria-expanded="false" aria-controls="studio-panel"><span id="studio-label" aria-live="polite">STUDIO: Après coup by Laurie Torres</span></button>
+    </div>
+    <div id="studio-panel" class="studio-panel" hidden>
+      <div id="spotify-embed"></div>
+      <a href="https://open.spotify.com/album/7KX1ViCFuWN77rGG4KREKQ" target="_blank" rel="noopener noreferrer">Open album in Spotify ↗</a>
+    </div>
+  </footer>
+  <script src="studio-tracks.js?v=1"></script>
+  <script src="studio.js?v=1"></script>
+  <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+</body>
+</html>

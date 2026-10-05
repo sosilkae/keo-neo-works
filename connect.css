@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('fonts/PP Neue Montreal/PPNeueMontreal-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.connect-main { padding-top: 82px; min-height: calc(100svh - 44px); display: flex; flex-direction: column; }
+.connect-film { flex: none; position: relative; width: 100%; aspect-ratio: 393 / 261; background: #eee; }
+.connect-film video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.film-toggle { position: absolute; bottom: 12px; right: 12px; border: 0; border-radius: 0; background: rgb(255 255 255 / .9); color: #000; padding: 8px 12px; cursor: pointer; opacity: 0; }
+.connect-film:hover .film-toggle, .film-toggle:focus-visible, .connect-film.is-paused .film-toggle { opacity: 1; }
+.connect-content { padding: 40px 24px 20px; display: flex; flex: 1; flex-direction: column; }
+.connect-copy { max-width: 266px; font-size: 16px; line-height: 19px; letter-spacing: .02em; font-weight: 500; }
+.connect-copy p { margin: 0; }
+.connect-copy p + p { margin-top: 19px; }
+.connect-links { padding-top: 130px; margin-top: auto; font-style: normal; font-size: 24px; font-weight: 500; line-height: 29px; letter-spacing: .02em; display: flex; flex-direction: column; gap: 5px; }
+.email-link { display: flex; align-items: center; gap: 2px; }
+.email-link img { flex: none; }
+.connect-links a { width: fit-content; }
+.connect-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.studio-bar { min-height: 44px; display: flex; align-items: center; background: #000; color: #fff; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: .02em; padding-right: 12px; }
+.studio-play { width: 44px; height: 44px; display: grid; place-items: center; border: 0; padding: 0; background: transparent; flex: none; }
+.studio-status { flex: none; }
+@media (max-width: 359px) {
+  .connect-links { font-size: 20px; letter-spacing: 0; }
+  .studio-bar { font-size: 10px; }
+}
+@media (min-width: 768px) {
+  .connect-main { padding-top: 100px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: stretch; }
+  .connect-film { aspect-ratio: auto; min-height: 650px; }
+  .connect-film video { position: absolute; inset: 0; }
+  .connect-content { padding: 48px clamp(32px, 5vw, 80px); }
+  .connect-copy { max-width: 360px; font-size: 20px; line-height: 25px; }
+  .connect-copy p + p { margin-top: 25px; }
+  .connect-links { font-size: clamp(19px, 1.65vw, 24px); padding-top: 90px; }
+}
+@media (prefers-reduced-motion: reduce) { .film-toggle { opacity: 1; } }
+
+.studio-player { position: relative; z-index: 22; }
+.studio-bar { cursor: pointer; list-style: none; }
+.studio-bar::-webkit-details-marker { display: none; }
+.studio-bar:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.studio-panel { position: absolute; bottom: 100%; left: 0; width: min(100%, 480px); padding: 12px; background: #000; color: #fff; }
+.studio-panel iframe { display: block; border: 0; border-radius: 12px; max-height: calc(100svh - 112px); }
+.studio-panel > a { display: inline-block; margin-top: 12px; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+
+.studio-expand { flex: 1; min-width: 0; min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: inherit; text-align: left; font: inherit; cursor: pointer; }
+.studio-play { color: white; cursor: pointer; }
+.studio-play:disabled { cursor: wait; opacity: .5; }
+.studio-play [hidden] { display: none; }
+.pause-symbol { font-size: 20px; line-height: 1; }
+.studio-status { opacity: .35; }
+.studio-player.is-playing .studio-status { opacity: 1; }
