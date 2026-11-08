@@ -22,7 +22,9 @@ const repositoryPieces = imageSets.map((images,index) => ({
  category:['Prototypes','Prototypes','Sketches','Failures','Prototypes','Prototypes','Failures','Sketches','Prototypes','Failures'][index],
  wide:index===2 || index===7, tall:index===7, images,
 }));
+if (window.pdpPreview) Object.assign(repositoryPieces.find(piece=>piece.id===window.pdpPreview.id),window.pdpPreview);
 function imageElement(item, { thumbnail=false, eager=false }={}) {
+ if(item.layout && window.pdpPreview) return window.pdpPreview.renderImage(item,{thumbnail,eager});
  const image=document.createElement('img');
  const base=`images/ecommerce/web/${item.file}`;
  image.src=`${base}-${thumbnail ? 96 : 1120}.webp`;
@@ -31,7 +33,7 @@ function imageElement(item, { thumbnail=false, eager=false }={}) {
  return image;
 }
 const prefersReducedMotion=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
-function createCarousel(images, { label, href, onOpen, eager=false, initial=0 }={}) {
+function createCarousel(images, { label, href, onOpen, onChange, eager=false, initial=0 }={}) {
  const carousel=document.createElement('div'); carousel.className='media-carousel';
  carousel.setAttribute('role','region'); carousel.setAttribute('aria-label',label);
  const track=document.createElement('div'); track.className='media-track';
@@ -63,6 +65,7 @@ function createCarousel(images, { label, href, onOpen, eager=false, initial=0 }=
   measuredWidth=track.clientWidth;
   active=Math.max(0,Math.min(images.length-1,Math.round(track.scrollLeft/Math.max(1,track.clientWidth))));
   buttons.forEach((button,index)=>button.setAttribute('aria-pressed',String(index===active)));
+  onChange?.(active);
  }
  function goTo(index) { track.scrollTo({left:index*track.clientWidth,behavior:prefersReducedMotion() ? 'instant' : 'smooth'}); }
  images.forEach((item,index)=>{
@@ -173,7 +176,8 @@ if (commentForm) {
 
 function buildPieceMedia(piece) {
  const requested=Number(params.get('image'));
- const initial=Number.isInteger(requested) && requested>=0 && requested<3 ? requested : 0;
+ const heroCount=piece.heroCount || 3;
+ const initial=Number.isInteger(requested) && requested>=0 && requested<heroCount ? requested : 0;
  const gallery=document.createElement('dialog'); gallery.className='quick-gallery';
  gallery.setAttribute('aria-label',`${piece.title} image gallery`);
  const close=document.createElement('button'); close.type='button'; close.className='gallery-close';close.textContent='Close';
@@ -230,7 +234,7 @@ function buildPieceMedia(piece) {
   }
  });
  const resize=new ResizeObserver(()=>{if(gallery.open) selectImage(active,false);});resize.observe(scroll);
- const hero=createCarousel(piece.images.slice(0,3),{label:piece.title,onOpen:openGallery,eager:true,initial});
+ const hero=createCarousel(piece.images.slice(0,heroCount),{label:piece.title,onOpen:openGallery,onChange:window.pdpPreview?.onSlideChange,eager:true,initial});
  document.querySelector('.piece-hero').append(hero);
  document.querySelectorAll('[data-gallery-image]').forEach(button=>{
   const index=Number(button.dataset.galleryImage);

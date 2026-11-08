@@ -16,3 +16,7 @@ Invite requests prepare an email draft. Comments are saved locally in the curren
 
 
 The mobile PDP uses `pdp.css` and `pdp.js` for its fixed logo/breadcrumb header and bottom action panel. The panel compacts when the inline title enters the usable viewport; both Leave a Note states focus the existing note form. Add to Bag stores a prototype selection in browser-local storage (`keoneo-bag`). Titles, categories, and dimensions still use sample wireframe metadata.
+
+## Single-item PDP preview
+
+`piece.html?id=1` previews the revised Challace 1892 design through `pdp-preview.js` and `pdp-preview.css`. It uses the supplied five-slide Figma carousel, editorial content, FAQ cards, related objects, and a personalized signup sheet. Other piece IDs retain the original PDP. The archive keeps its original sample data. Signup validates an email and previews a confirmation in memory; it does not send, store, or subscribe the email. Existing comments and bag selections remain browser-local. Preview artwork is stored in `images/pdp-preview`.

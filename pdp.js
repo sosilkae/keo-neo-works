@@ -3,21 +3,22 @@
  if(!panel) return;
  const id=Number(new URLSearchParams(location.search).get('id'));
  const piece=repositoryPieces.find(item=>item.id===id) || repositoryPieces[0];
- const type=piece.id===9 ? 'Vessel' : piece.id===10 ? 'Bowl' : [3,8].includes(piece.id) ? 'Collection' : 'Cup';
+ const type=piece.type || (piece.id===9 ? 'Vessel' : piece.id===10 ? 'Bowl' : [3,8].includes(piece.id) ? 'Collection' : 'Cup');
  document.querySelectorAll('[data-piece-type]').forEach(element=>{element.textContent=type;});
  // The dimensions below are wireframe sample copy until real measurements arrive.
- document.querySelectorAll('[data-piece-dimensions]').forEach(element=>{element.textContent='100cm by 200cm';});
+ document.querySelectorAll('[data-piece-dimensions]').forEach(element=>{element.textContent=piece.dimensions || '100cm by 200cm';});
  const heading=document.querySelector('.piece-info h1');
  const mobileViewport=matchMedia('(max-width:767px)');
  let scheduled=false;
  function setCompact() {
   scheduled=false;
-  if(document.body.classList.contains('menu-open') || document.body.classList.contains('gallery-open')) return;
+  if(document.body.classList.contains('menu-open') || document.body.classList.contains('gallery-open') || document.body.classList.contains('sheet-open')) return;
   // Switch once the inline title is fully above the compact action bar.
   const rect=heading.getBoundingClientRect();
   // A small return margin prevents flickering around the transition point.
   const wasCompact=document.body.classList.contains('piece-actions-compact');
-  const compact=mobileViewport.matches && rect.bottom<=innerHeight-80+(wasCompact ? 12 : 0);
+  const hasScrolled=!window.pdpPreview || scrollY>32;
+  const compact=mobileViewport.matches && hasScrolled && rect.bottom<=innerHeight-80+(wasCompact ? 12 : 0);
   document.body.classList.toggle('piece-actions-compact',compact);
   document.querySelector('.piece-action-summary').setAttribute('aria-hidden',String(compact));
  }
