@@ -61,6 +61,13 @@ let downStart = null;
 let scheduled = false;
 
 function renderNavigation(progress) {
+  if (mobile.matches && document.body.classList.contains('piece-page')) {
+    header.inert = false;
+    logo.classList.remove('is-active');
+    logo.setAttribute('aria-hidden', 'true');
+    logo.tabIndex = -1;
+    return;
+  }
   const p = reducedMotion.matches ? (progress >= .5 ? 1 : 0) : progress;
   const text = 1 - clamp(p / .55);
   const mark = clamp((p - .45) / .55);
@@ -83,6 +90,11 @@ function updateNavigation() {
   const y = Math.max(0, Math.min(scrollY, document.documentElement.scrollHeight - innerHeight));
   const delta = y - lastY;
   lastY = y;
+  if (mobile.matches && document.body.classList.contains('piece-page')) {
+    document.body.classList.remove('nav-returning');
+    renderNavigation(0);
+    return;
+  }
   if (!mobile.matches) {
     returning = false;
     downStart = null;
